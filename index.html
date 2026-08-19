@@ -664,8 +664,25 @@ function pickTodayWords(){
   }
   return picked.map(i => WORDS[i]);
 }
+let _audio = null;
+// 微信内置浏览器不支持 Web Speech，优先用在线真人 TTS（有道词典接口），
+// 失败再降级到 speechSynthesis，桌面端也能用。
 function speak(text){
   if(!state.soundOn) return;
+  const url = 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(text) + '&type=1'; // type=1 美式发音
+  try{
+    if(_audio) { try{ _audio.pause(); }catch(e){} }
+    _audio = new Audio(url);
+    _audio.volume = 1;
+    const p = _audio.play();
+    if(p && typeof p.catch === 'function'){
+      p.catch(()=> fallbackTTS(text));
+    }
+  }catch(e){
+    fallbackTTS(text);
+  }
+}
+function fallbackTTS(text){
   if(!('speechSynthesis' in window)) return;
   try{
     window.speechSynthesis.cancel();
