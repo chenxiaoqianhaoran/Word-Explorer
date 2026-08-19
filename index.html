@@ -432,12 +432,12 @@ ul{list-style:none}
       <div class="card hero-card">
         <div class="streak-flame" id="streakFlame">🔥 今天开始打卡吧</div>
         <div class="hero-mascot" id="heroMascot">🦊</div>
-        <h2 id="heroMessage">每天 5 个单词，轻松变达人！</h2>
+        <h2 id="heroMessage">每天 6 个单词，轻松变达人！</h2>
         <button class="btn btn-primary btn-big" onclick="beginLearn()">开始今日学习 ✨</button>
         <div class="today-progress">
           <div class="progress-label">今日进度</div>
           <div class="progress-bar"><div class="progress-fill" id="todayFill"></div></div>
-          <div class="progress-text" id="todayProgressText">0 / 5 个单词</div>
+          <div class="progress-text" id="todayProgressText">0 / 6 个单词</div>
         </div>
       </div>
       <div class="quick-grid">
@@ -494,7 +494,7 @@ ul{list-style:none}
       <div class="card">
         <h3>✅ 今日任务</h3>
         <ul class="task-list">
-          <li id="taskLearn">📖 学习 5 个单词 <span class="task-status"></span></li>
+          <li id="taskLearn">📖 学习 6 个单词 <span class="task-status"></span></li>
           <li id="taskGame">🎮 完成 1 局游戏 <span class="task-status"></span></li>
           <li id="taskCheckin">🏆 完成今日打卡 <span class="task-status"></span></li>
         </ul>
@@ -539,70 +539,153 @@ ul{list-style:none}
 
 <script>
 /* ==================== 数据 ==================== */
-// 四年级常用英语单词（约 60 个，分 12 组，每天学 5 个，2 周一轮）
+// 四年级真实学习词汇（来自截图，共约 136 个，每天学 6 个）
 const WORDS = [
-  {w:"apple",m:"苹果",p:"/ˈæpl/"},
-  {w:"banana",m:"香蕉",p:"/bəˈnænə/"},
-  {w:"orange",m:"橙子",p:"/ˈɒrɪndʒ/"},
-  {w:"pear",m:"梨",p:"/peə/"},
-  {w:"grape",m:"葡萄",p:"/ɡreɪp/"},
-  {w:"family",m:"家庭",p:"/ˈfæməli/"},
-  {w:"father",m:"爸爸",p:"/ˈfɑːðə/"},
-  {w:"mother",m:"妈妈",p:"/ˈmʌðə/"},
-  {w:"brother",m:"兄弟",p:"/ˈbrʌðə/"},
-  {w:"sister",m:"姐妹",p:"/ˈsɪstə/"},
-  {w:"school",m:"学校",p:"/skuːl/"},
-  {w:"teacher",m:"老师",p:"/ˈtiːtʃə/"},
-  {w:"student",m:"学生",p:"/ˈstjuːdnt/"},
-  {w:"class",m:"班级",p:"/klɑːs/"},
-  {w:"book",m:"书",p:"/bʊk/"},
-  {w:"cat",m:"猫",p:"/kæt/"},
-  {w:"dog",m:"狗",p:"/dɒɡ/"},
-  {w:"bird",m:"鸟",p:"/bɜːd/"},
-  {w:"fish",m:"鱼",p:"/fɪʃ/"},
-  {w:"tiger",m:"老虎",p:"/ˈtaɪɡə/"},
-  {w:"red",m:"红色",p:"/red/"},
-  {w:"blue",m:"蓝色",p:"/bluː/"},
-  {w:"green",m:"绿色",p:"/ɡriːn/"},
-  {w:"yellow",m:"黄色",p:"/ˈjeləʊ/"},
-  {w:"black",m:"黑色",p:"/blæk/"},
-  {w:"white",m:"白色",p:"/waɪt/"},
-  {w:"one",m:"一",p:"/wʌn/"},
-  {w:"two",m:"二",p:"/tuː/"},
-  {w:"three",m:"三",p:"/θriː/"},
-  {w:"four",m:"四",p:"/fɔː/"},
-  {w:"five",m:"五",p:"/faɪv/"},
-  {w:"head",m:"头",p:"/hed/"},
-  {w:"eye",m:"眼睛",p:"/aɪ/"},
-  {w:"ear",m:"耳朵",p:"/ɪə/"},
-  {w:"nose",m:"鼻子",p:"/nəʊz/"},
-  {w:"mouth",m:"嘴",p:"/maʊθ/"},
-  {w:"hand",m:"手",p:"/hænd/"},
-  {w:"foot",m:"脚",p:"/fʊt/"},
-  {w:"sun",m:"太阳",p:"/sʌn/"},
-  {w:"moon",m:"月亮",p:"/muːn/"},
-  {w:"star",m:"星星",p:"/stɑː/"},
-  {w:"cloud",m:"云",p:"/klaʊd/"},
-  {w:"rain",m:"雨",p:"/reɪn/"},
-  {w:"snow",m:"雪",p:"/snəʊ/"},
-  {w:"water",m:"水",p:"/ˈwɔːtə/"},
-  {w:"happy",m:"开心",p:"/ˈhæpi/"},
-  {w:"sad",m:"伤心",p:"/sæd/"},
-  {w:"big",m:"大的",p:"/bɪɡ/"},
+  // Unit 1
+  {w:"beautiful",m:"美丽的",p:"/ˈbjuːtɪfl/"},
+  {w:"flower",m:"花",p:"/ˈflaʊə/"},
+  {w:"glad",m:"高兴的",p:"/ɡlæd/"},
+  {w:"seat",m:"座位",p:"/siːt/"},
+  {w:"fine",m:"很好的",p:"/faɪn/"},
+  {w:"bathroom",m:"卫生间；浴室",p:"/ˈbɑːθruːm/"},
+  {w:"baby",m:"婴儿",p:"/ˈbeɪbi/"},
+  {w:"problem",m:"问题",p:"/ˈprɒbləm/"},
+  {w:"tea",m:"茶",p:"/tiː/"},
+  {w:"around",m:"周围",p:"/əˈraʊnd/"},
+  {w:"great",m:"好极了",p:"/ɡreɪt/"},
+  {w:"guest",m:"客人",p:"/ɡest/"},
+  {w:"host",m:"主人",p:"/həʊst/"},
   {w:"small",m:"小的",p:"/smɔːl/"},
-  {w:"good",m:"好的",p:"/ɡʊd/"},
-  {w:"bad",m:"坏的",p:"/bæd/"},
-  {w:"cat",m:"猫",p:"/kæt/"},
-  {w:"milk",m:"牛奶",p:"/mɪlk/"},
-  {w:"bread",m:"面包",p:"/bred/"},
+  {w:"gift",m:"礼物",p:"/ɡɪft/"},
+  // Unit 2
+  {w:"yourself",m:"你自己",p:"/jɔːˈself/"},
   {w:"rice",m:"米饭",p:"/raɪs/"},
-  {w:"egg",m:"鸡蛋",p:"/eɡ/"},
-  {w:"ball",m:"球",p:"/bɔːl/"},
-  {w:"kite",m:"风筝",p:"/kaɪt/"},
-  {w:"car",m:"汽车",p:"/kɑː/"},
-  {w:"bus",m:"公共汽车",p:"/bʌs/"},
-  {w:"bike",m:"自行车",p:"/baɪk/"},
-  {w:"toy",m:"玩具",p:"/tɔɪ/"},
+  {w:"soup",m:"汤",p:"/suːp/"},
+  {w:"could",m:"可以",p:"/kʊd/"},
+  {w:"pass",m:"传递",p:"/pɑːs/"},
+  {w:"here",m:"这里",p:"/hɪə/"},
+  {w:"house",m:"房子",p:"/haʊs/"},
+  {w:"if",m:"如果",p:"/ɪf/"},
+  {w:"feel",m:"感觉",p:"/fiːl/"},
+  {w:"full",m:"饱的",p:"/fʊl/"},
+  {w:"drop",m:"掉落",p:"/drɒp/"},
+  {w:"spoon",m:"勺子",p:"/spuːn/"},
+  {w:"floor",m:"地板",p:"/flɔː/"},
+  {w:"pick",m:"捡起",p:"/pɪk/"},
+  {w:"end",m:"结束",p:"/end/"},
+  {w:"really",m:"非常；真的",p:"/ˈrɪəli/"},
+  // Unit 3
+  {w:"any",m:"任何",p:"/ˈeni/"},
+  {w:"taste",m:"尝起来",p:"/teɪst/"},
+  {w:"noodle",m:"面条",p:"/ˈnuːdl/"},
+  {w:"enjoy",m:"享受",p:"/ɪnˈdʒɔɪ/"},
+  {w:"then",m:"然后",p:"/ðen/"},
+  {w:"last",m:"最后",p:"/lɑːst/"},
+  {w:"minute",m:"分钟",p:"/ˈmɪnɪt/"},
+  {w:"only",m:"唯一的；只有",p:"/ˈəʊnli/"},
+  {w:"cook",m:"烹饪；厨师",p:"/kʊk/"},
+  {w:"dumpling",m:"饺子",p:"/ˈdʌmplɪŋ/"},
+  {w:"into",m:"到……里面",p:"/ˈɪntuː/"},
+  {w:"pot",m:"锅",p:"/pɒt/"},
+  {w:"boil",m:"煮沸",p:"/bɔɪl/"},
+  {w:"careful",m:"小心的",p:"/ˈkeəfl/"},
+  {w:"hot",m:"热的",p:"/hɒt/"},
+  {w:"cold",m:"冷的",p:"/kəʊld/"},
+  {w:"remember",m:"记得",p:"/rɪˈmembə/"},
+  {w:"fire",m:"火",p:"/ˈfaɪə/"},
+  // Unit 4
+  {w:"kitchen",m:"厨房",p:"/ˈkɪtʃɪn/"},
+  {w:"sweep",m:"清扫",p:"/swiːp/"},
+  {w:"dish",m:"盘子；菜肴",p:"/dɪʃ/"},
+  {w:"rubbish",m:"垃圾",p:"/ˈrʌbɪʃ/"},
+  {w:"clear",m:"清理；清楚的",p:"/klɪə/"},
+  {w:"chore",m:"家务",p:"/tʃɔː/"},
+  {w:"dirty",m:"脏的",p:"/ˈdɜːti/"},
+  {w:"well",m:"（语气词）啊；健康的；好",p:"/wel/"},
+  {w:"bin",m:"箱子",p:"/bɪn/"},
+  {w:"because",m:"因为",p:"/bɪˈkɒz/"},
+  {w:"do",m:"做",p:"/duː/"},
+  {w:"agree",m:"同意",p:"/əˈɡriː/"},
+  // Unit 5
+  {w:"smile",m:"微笑",p:"/smaɪl/"},
+  {w:"open",m:"开着的；打开",p:"/ˈəʊpən/"},
+  {w:"cheer",m:"鼓励",p:"/tʃɪə/"},
+  {w:"ready",m:"准备好的",p:"/ˈredi/"},
+  {w:"kind",m:"友善的",p:"/kaɪnd/"},
+  // Unit 6
+  {w:"lot",m:"许多",p:"/lɒt/"},
+  {w:"happy",m:"开心的",p:"/ˈhæpi/"},
+  {w:"share",m:"分享",p:"/ʃeə/"},
+  {w:"hard",m:"努力地",p:"/hɑːd/"},
+  {w:"animal",m:"动物",p:"/ˈænɪml/"},
+  {w:"tell",m:"告诉",p:"/tel/"},
+  {w:"else",m:"其他的",p:"/els/"},
+  {w:"him",m:"他",p:"/hɪm/"},
+  {w:"birthday",m:"生日",p:"/ˈbɜːθdeɪ/"},
+  {w:"cake",m:"蛋糕",p:"/keɪk/"},
+  {w:"spend",m:"度过",p:"/spend/"},
+  {w:"sweet",m:"体贴的；甜的",p:"/swiːt/"},
+  {w:"laugh",m:"笑",p:"/lɑːf/"},
+  {w:"all",m:"全部的",p:"/ɔːl/"},
+  {w:"surprise",m:"使惊奇；惊喜",p:"/səˈpraɪz/"},
+  {w:"funny",m:"有趣的",p:"/ˈfʌni/"},
+  {w:"story",m:"故事",p:"/ˈstɔːri/"},
+  {w:"picture",m:"画；照片",p:"/ˈpɪktʃə/"},
+  // Unit 7
+  {w:"worker",m:"工人",p:"/ˈwɜːkə/"},
+  {w:"doctor",m:"医生",p:"/ˈdɒktə/"},
+  {w:"driver",m:"司机",p:"/ˈdraɪvə/"},
+  {w:"evening",m:"晚上",p:"/ˈiːvnɪŋ/"},
+  {w:"nurse",m:"护士",p:"/nɜːs/"},
+  {w:"farmer",m:"农民",p:"/ˈfɑːmə/"},
+  {w:"scientist",m:"科学家",p:"/ˈsaɪəntɪst/"},
+  // Unit 8
+  {w:"grandpa",m:"爷爷；外公",p:"/ˈɡrænpɑː/"},
+  {w:"uncle",m:"叔叔；舅舅",p:"/ˈʌŋkl/"},
+  {w:"aunt",m:"姑妈；姨妈",p:"/ɑːnt/"},
+  {w:"sister",m:"姐姐；妹妹",p:"/ˈsɪstə/"},
+  {w:"leave",m:"留下；离开",p:"/liːv/"},
+  {w:"note",m:"便条；笔记",p:"/nəʊt/"},
+  {w:"sing",m:"唱歌",p:"/sɪŋ/"},
+  {w:"song",m:"歌曲",p:"/sɒŋ/"},
+  {w:"warm",m:"温暖的",p:"/wɔːm/"},
+  {w:"who",m:"谁",p:"/huː/"},
+  {w:"date",m:"日期",p:"/deɪt/"},
+  {w:"policeman",m:"男警察",p:"/pəˈliːsmən/"},
+  {w:"policewoman",m:"女警察",p:"/pəˈliːswʊmən/"},
+  {w:"afternoon",m:"下午",p:"/ˌɑːftəˈnuːn/"},
+  {w:"night",m:"夜晚",p:"/naɪt/"},
+  {w:"long",m:"长的",p:"/lɒŋ/"},
+  {w:"game",m:"游戏",p:"/ɡeɪm/"},
+  {w:"sound",m:"听起来",p:"/saʊnd/"},
+  {w:"dear",m:"亲爱的",p:"/dɪə/"},
+  {w:"once",m:"一次",p:"/wʌns/"},
+  {w:"weekend",m:"周末",p:"/ˌwiːkˈend/"},
+  {w:"sit",m:"坐",p:"/sɪt/"},
+  {w:"wish",m:"愿望；祝愿",p:"/wɪʃ/"},
+  {w:"back",m:"以前；后面的",p:"/bæk/"},
+  {w:"through",m:"穿过",p:"/θruː/"},
+  {w:"forward",m:"向前",p:"/ˈfɔːwəd/"},
+  {w:"part",m:"部分",p:"/pɑːt/"},
+  {w:"hope",m:"希望",p:"/həʊp/"},
+  {w:"during",m:"在……期间",p:"/ˈdjʊərɪŋ/"},
+  {w:"tree",m:"树",p:"/triː/"},
+  {w:"never",m:"永不",p:"/ˈnevə/"},
+  {w:"old",m:"老的",p:"/əʊld/"},
+  {w:"dance",m:"跳舞",p:"/dɑːns/"},
+  {w:"firework",m:"烟花",p:"/ˈfaɪəwɜːk/"},
+  {w:"mooncake",m:"月饼",p:"/ˈmuːnkeɪk/"},
+  {w:"visit",m:"拜访",p:"/ˈvɪzɪt/"},
+  {w:"meal",m:"一餐",p:"/miːl/"},
+  {w:"favourite",m:"最喜欢的",p:"/ˈfeɪvərɪt/"},
+  {w:"festival",m:"节日",p:"/ˈfestɪvl/"},
+  {w:"far",m:"远的",p:"/fɑː/"},
+  {w:"near",m:"近的；附近的",p:"/nɪə/"},
+  // Review
+  {w:"party",m:"派对",p:"/ˈpɑːti/"},
+  {w:"elephant",m:"大象",p:"/ˈelɪfənt/"},
+  {w:"most",m:"最",p:"/məʊst/"},
+  {w:"Africa",m:"非洲",p:"/ˈæfrɪkə/"},
 ];
 
 /* ==================== 状态 ==================== */
@@ -637,6 +720,8 @@ function saveState(){
   try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
 }
 
+const DAILY_COUNT = 6; // 每日学习单词数
+
 /* ==================== 工具 ==================== */
 function todayKey(){
   const d=new Date();
@@ -652,17 +737,24 @@ function ensureToday(){
   }
 }
 function pickTodayWords(){
-  // 用日期做种子，每天挑 5 个不同的单词
+  // 用日期做种子，每天挑 DAILY_COUNT 个不同的单词
   const d = new Date();
   const seed = d.getFullYear()*1000 + (d.getMonth()+1)*50 + d.getDate();
   const picked = [];
   let s = seed;
-  while(picked.length < 5){
+  while(picked.length < DAILY_COUNT){
     s = (s * 9301 + 49297) % 233280;
     const idx = s % WORDS.length;
     if(!picked.includes(idx)) picked.push(idx);
   }
   return picked.map(i => WORDS[i]);
+}
+function shuffleWords(){
+  // Fisher-Yates 洗牌：整轮学完后重新打乱单词顺序
+  for(let i = WORDS.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [WORDS[i], WORDS[j]] = [WORDS[j], WORDS[i]];
+  }
 }
 let _audio = null;
 // 微信内置浏览器不支持 Web Speech，优先用在线真人 TTS（有道词典接口），
@@ -746,8 +838,8 @@ function renderHome(){
   ensureToday();
   const today = pickTodayWords();
   const learned = state.learnedToday.length;
-  document.getElementById('todayFill').style.width = (learned/5*100)+'%';
-  document.getElementById('todayProgressText').textContent = learned + ' / 5 个单词';
+  document.getElementById('todayFill').style.width = (learned/DAILY_COUNT*100)+'%';
+  document.getElementById('todayProgressText').textContent = learned + ' / ' + DAILY_COUNT + ' 个单词';
 
   const sf = document.getElementById('streakFlame');
   const hm = document.getElementById('heroMessage');
@@ -757,7 +849,7 @@ function renderHome(){
     hm.textContent = '今天也超棒！继续加油 ✨';
   }else{
     sf.textContent = '🔥 今天开始打卡吧';
-    hm.textContent = '每天 5 个单词，轻松变达人！';
+    hm.textContent = '每天 ' + DAILY_COUNT + ' 个单词，轻松变达人！';
   }
 
   const w = document.getElementById('homeTodayWords');
@@ -792,18 +884,18 @@ function renderLearn(){
   const today = pickTodayWords();
   const idx = state.learnedToday.length;
   const c = document.getElementById('learnContent');
-  if(idx >= 5){
+  if(idx >= DAILY_COUNT){
     c.innerHTML = `<div class="card learn-complete">
       <span class="big-emoji">🎉</span>
       <h2>太棒了！</h2>
-      <p style="color:#9A8775;margin-bottom:18px">今天的 5 个单词已学完</p>
+      <p style="color:#9A8775;margin-bottom:18px">今天的 ${DAILY_COUNT} 个单词已学完</p>
       <button class="btn btn-primary btn-big" onclick="showView('games')" style="background:#FF8A3D;color:#fff;max-width:220px">去玩游戏 🎮</button>
     </div>`;
     return;
   }
   const w = today[idx];
   c.innerHTML = `
-    <div class="learn-progress">第 ${idx+1} / 5 个单词</div>
+    <div class="learn-progress">第 ${idx+1} / ${DAILY_COUNT} 个单词</div>
     <div class="learn-card">
       <div class="learn-word">${w.w}</div>
       <div class="learn-phonetic">${w.p}</div>
@@ -827,9 +919,18 @@ function learnNext(){
   saveState();
   toast('+1 ⭐ 已记住 '+w.w);
   confetti();
-  if(state.learnedToday.length === 5){
+  if(state.learnedToday.length === DAILY_COUNT){
     // 当天学完，自动打卡
     doCheckin(true);
+  }
+  // 全部单词都学过一遍后，自动打乱并开启新一轮
+  if(state.wordsLearned.length >= WORDS.length){
+    shuffleWords();
+    state.wordsLearned = [];
+    saveState();
+    setTimeout(()=>{
+      showModal('🎉','一轮通关！','所有单词都已学过一遍，顺序已重新打乱，继续加油！');
+    }, 400);
   }
   renderLearn();
 }
