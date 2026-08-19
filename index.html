@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>单词探险家 · 四年级英语</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="mascot" id="mascot">🦊</div>
+    <div class="greeting">
+      <div class="greeting-text" id="greetingText">你好呀！</div>
+      <div class="greeting-date" id="greetingDate"></div>
+    </div>
+    <button class="btn btn-sound" id="soundBtn" onclick="toggleSound()">🔊</button>
+    <div class="stars-badge" id="starsBadge">⭐ 0</div>
+  </header>
+
+  <main id="view">
+    <!-- 首页 -->
+    <section class="view active" id="view-home">
+      <div class="card hero-card">
+        <div class="streak-flame" id="streakFlame">🔥 今天开始打卡吧</div>
+        <div class="hero-mascot" id="heroMascot">🦊</div>
+        <h2 id="heroMessage">每天 5 个单词，轻松变达人！</h2>
+        <button class="btn btn-primary btn-big" onclick="beginLearn()">开始今日学习 ✨</button>
+        <div class="today-progress">
+          <div class="progress-label">今日进度</div>
+          <div class="progress-bar"><div class="progress-fill" id="todayFill"></div></div>
+          <div class="progress-text" id="todayProgressText">0 / 5 个单词</div>
+        </div>
+      </div>
+      <div class="quick-grid">
+        <div class="card quick-item" onclick="showView('learn')"><div class="qi-emoji">📖</div>学单词</div>
+        <div class="card quick-item" onclick="showView('games')"><div class="qi-emoji">🎮</div>玩游戏</div>
+        <div class="card quick-item" onclick="showView('checkin')"><div class="qi-emoji">📅</div>去打卡</div>
+        <div class="card quick-item" onclick="showView('progress')"><div class="qi-emoji">🏆</div>看成就</div>
+      </div>
+      <div class="card today-words-card">
+        <h3>📚 今日单词</h3>
+        <div id="homeTodayWords" class="word-chips"></div>
+      </div>
+    </section>
+
+    <!-- 学习 -->
+    <section class="view" id="view-learn">
+      <div id="learnContent"></div>
+    </section>
+
+    <!-- 游戏 -->
+    <section class="view" id="view-games">
+      <h2 class="view-title">🎮 趣味游戏</h2>
+      <p class="subtitle">玩一局游戏，就能完成今日打卡任务哦</p>
+      <div class="game-list">
+        <button class="card game-card" onclick="startGame('listen')">
+          <div class="gc-emoji">👂</div><div class="gc-name">听音选词</div><div class="gc-desc">听发音，选单词</div>
+        </button>
+        <button class="card game-card" onclick="startGame('match')">
+          <div class="gc-emoji">🔗</div><div class="gc-name">单词配对</div><div class="gc-desc">中英连连看</div>
+        </button>
+        <button class="card game-card" onclick="startGame('spell')">
+          <div class="gc-emoji">🔤</div><div class="gc-name">字母拼词</div><div class="gc-desc">拼出正确单词</div>
+        </button>
+      </div>
+      <div id="gameArea"></div>
+    </section>
+
+    <!-- 打卡 -->
+    <section class="view" id="view-checkin">
+      <h2 class="view-title">📅 打卡中心</h2>
+      <div class="card streak-card">
+        <div class="streak-big">🔥 <span id="ckStreak">0</span></div>
+        <div class="streak-sub">连续打卡天数</div>
+        <div class="best-streak">历史最佳：<span id="ckBest">0</span> 天</div>
+      </div>
+      <div class="card calendar-card">
+        <div class="calendar-head">
+          <button class="btn btn-ghost" onclick="calPrev()">‹</button>
+          <span id="calTitle"></span>
+          <button class="btn btn-ghost" onclick="calNext()">›</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </div>
+      <div class="card">
+        <h3>✅ 今日任务</h3>
+        <ul class="task-list">
+          <li id="taskLearn">📖 学习 5 个单词 <span class="task-status"></span></li>
+          <li id="taskGame">🎮 完成 1 局游戏 <span class="task-status"></span></li>
+          <li id="taskCheckin">🏆 完成今日打卡 <span class="task-status"></span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 成长 -->
+    <section class="view" id="view-progress">
+      <h2 class="view-title">🏆 我的成长</h2>
+      <div class="card stats-card">
+        <div class="stat"><div class="stat-num" id="statDays">0</div><div class="stat-label">打卡天数</div></div>
+        <div class="stat"><div class="stat-num" id="statWords">0</div><div class="stat-label">认识单词</div></div>
+        <div class="stat"><div class="stat-num" id="statStars">0</div><div class="stat-label">星星</div></div>
+      </div>
+      <div class="card">
+        <h3>📈 本周学习</h3>
+        <div class="bar-chart" id="weekChart"></div>
+      </div>
+      <div class="card">
+        <h3>🎖️ 我的徽章</h3>
+        <div class="badge-grid" id="badgeGrid"></div>
+      </div>
+      <div class="card">
+        <h3>🎯 我的称号</h3>
+        <div class="rank" id="rankDisplay"></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabbar">
+    <button class="tab active" data-view="home" onclick="showView('home')">🏠<span>首页</span></button>
+    <button class="tab" data-view="learn" onclick="showView('learn')">📖<span>学习</span></button>
+    <button class="tab" data-view="games" onclick="showView('games')">🎮<span>游戏</span></button>
+    <button class="tab" data-view="checkin" onclick="showView('checkin')">📅<span>打卡</span></button>
+    <button class="tab" data-view="progress" onclick="showView('progress')">🏆<span>成长</span></button>
+  </nav>
+</div>
+
+<div id="toast"></div>
+<div id="confetti"></div>
+<div id="modal"></div>
+
+<script src="words.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
