@@ -873,15 +873,8 @@ function renderHome(){
   }).join('');
   document.getElementById('starsBadge').textContent = '⭐ '+state.stars;
 
-  // 问候语
-  const h = new Date().getHours();
-  let greet = '你好呀！';
-  if(h<6) greet='夜深啦，记得早点睡';
-  else if(h<11) greet='早上好！';
-  else if(h<14) greet='中午好！';
-  else if(h<18) greet='下午好！';
-  else greet='晚上好！';
-  document.getElementById('greetingText').textContent = greet;
+  // 问候语（全天统一）
+  document.getElementById('greetingText').textContent = '栩浩小朋友加油呀！';
   const d = new Date();
   const weekdays=['周日','周一','周二','周三','周四','周五','周六'];
   document.getElementById('greetingDate').textContent =
