@@ -186,6 +186,20 @@ ul{list-style:none}
 .learn-complete .big-emoji{font-size:60px;display:block;margin-bottom:10px}
 .learn-complete h2{color:#FF6A1F;margin-bottom:8px}
 
+/* 读环节：例句 */
+.learn-example{
+  margin-top:16px;padding:14px;
+  background:#FFF6E9;border-radius:14px;
+  text-align:left;
+}
+.example-label{font-size:13px;color:#FF6A1F;font-weight:700;margin-bottom:8px}
+.example-en{font-size:16px;color:#3A2E26;font-weight:600;line-height:1.5;margin-bottom:4px}
+.example-cn{font-size:13px;color:#9A8775;margin-bottom:10px}
+.learn-tip{
+  margin-top:12px;font-size:13px;color:#FF6A1F;
+  text-align:center;background:#FFF1E1;border-radius:12px;padding:10px;
+}
+
 /* ============== 游戏视图 ============== */
 .game-list{
   display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:14px;
@@ -542,150 +556,150 @@ ul{list-style:none}
 // 四年级真实学习词汇（来自截图，共约 136 个，每天学 6 个）
 const WORDS = [
   // Unit 1
-  {w:"beautiful",m:"美丽的",p:"/ˈbjuːtɪfl/"},
-  {w:"flower",m:"花",p:"/ˈflaʊə/"},
-  {w:"glad",m:"高兴的",p:"/ɡlæd/"},
-  {w:"seat",m:"座位",p:"/siːt/"},
-  {w:"fine",m:"很好的",p:"/faɪn/"},
-  {w:"bathroom",m:"卫生间；浴室",p:"/ˈbɑːθruːm/"},
-  {w:"baby",m:"婴儿",p:"/ˈbeɪbi/"},
-  {w:"problem",m:"问题",p:"/ˈprɒbləm/"},
-  {w:"tea",m:"茶",p:"/tiː/"},
-  {w:"around",m:"周围",p:"/əˈraʊnd/"},
-  {w:"great",m:"好极了",p:"/ɡreɪt/"},
-  {w:"guest",m:"客人",p:"/ɡest/"},
-  {w:"host",m:"主人",p:"/həʊst/"},
-  {w:"small",m:"小的",p:"/smɔːl/"},
-  {w:"gift",m:"礼物",p:"/ɡɪft/"},
+  {w:"beautiful",m:"美丽的",p:"/ˈbjuːtɪfl/",e:"The flower is beautiful.",ec:"这朵花很美丽。"},
+  {w:"flower",m:"花",p:"/ˈflaʊə/",e:"She picks a red flower.",ec:"她摘了一朵红花。"},
+  {w:"glad",m:"高兴的",p:"/ɡlæd/",e:"I am glad to see you.",ec:"我很高兴见到你。"},
+  {w:"seat",m:"座位",p:"/siːt/",e:"Please take a seat.",ec:"请坐。"},
+  {w:"fine",m:"很好的",p:"/faɪn/",e:"I am fine, thank you.",ec:"我很好，谢谢。"},
+  {w:"bathroom",m:"卫生间；浴室",p:"/ˈbɑːθruːm/",e:"He is in the bathroom.",ec:"他在卫生间里。"},
+  {w:"baby",m:"婴儿",p:"/ˈbeɪbi/",e:"The baby is sleeping.",ec:"宝宝在睡觉。"},
+  {w:"problem",m:"问题",p:"/ˈprɒbləm/",e:"No problem.",ec:"没问题。"},
+  {w:"tea",m:"茶",p:"/tiː/",e:"I drink a cup of tea.",ec:"我喝一杯茶。"},
+  {w:"around",m:"周围",p:"/əˈraʊnd/",e:"Look around the room.",ec:"看看房间四周。"},
+  {w:"great",m:"好极了",p:"/ɡreɪt/",e:"You did a great job.",ec:"你做得真棒。"},
+  {w:"guest",m:"客人",p:"/ɡest/",e:"We have a guest today.",ec:"今天我们有一位客人。"},
+  {w:"host",m:"主人",p:"/həʊst/",e:"He is a friendly host.",ec:"他是一位友善的主人。"},
+  {w:"small",m:"小的",p:"/smɔːl/",e:"This dog is small.",ec:"这只狗很小。"},
+  {w:"gift",m:"礼物",p:"/ɡɪft/",e:"She gives me a gift.",ec:"她送了我一份礼物。"},
   // Unit 2
-  {w:"yourself",m:"你自己",p:"/jɔːˈself/"},
-  {w:"rice",m:"米饭",p:"/raɪs/"},
-  {w:"soup",m:"汤",p:"/suːp/"},
-  {w:"could",m:"可以",p:"/kʊd/"},
-  {w:"pass",m:"传递",p:"/pɑːs/"},
-  {w:"here",m:"这里",p:"/hɪə/"},
-  {w:"house",m:"房子",p:"/haʊs/"},
-  {w:"if",m:"如果",p:"/ɪf/"},
-  {w:"feel",m:"感觉",p:"/fiːl/"},
-  {w:"full",m:"饱的",p:"/fʊl/"},
-  {w:"drop",m:"掉落",p:"/drɒp/"},
-  {w:"spoon",m:"勺子",p:"/spuːn/"},
-  {w:"floor",m:"地板",p:"/flɔː/"},
-  {w:"pick",m:"捡起",p:"/pɪk/"},
-  {w:"end",m:"结束",p:"/end/"},
-  {w:"really",m:"非常；真的",p:"/ˈrɪəli/"},
+  {w:"yourself",m:"你自己",p:"/jɔːˈself/",e:"Did you do it yourself?",ec:"是你自己做的吗？"},
+  {w:"rice",m:"米饭",p:"/raɪs/",e:"I eat rice for lunch.",ec:"我午饭吃米饭。"},
+  {w:"soup",m:"汤",p:"/suːp/",e:"The soup is hot.",ec:"汤很烫。"},
+  {w:"could",m:"可以",p:"/kʊd/",e:"Could you help me?",ec:"你能帮我吗？"},
+  {w:"pass",m:"传递",p:"/pɑːs/",e:"Please pass me the book.",ec:"请把书递给我。"},
+  {w:"here",m:"这里",p:"/hɪə/",e:"Come here, please.",ec:"请到这里来。"},
+  {w:"house",m:"房子",p:"/haʊs/",e:"This is my house.",ec:"这是我的房子。"},
+  {w:"if",m:"如果",p:"/ɪf/",e:"If it rains, we stay home.",ec:"如果下雨，我们就待在家。"},
+  {w:"feel",m:"感觉",p:"/fiːl/",e:"I feel happy today.",ec:"我今天感到开心。"},
+  {w:"full",m:"饱的",p:"/fʊl/",e:"I am full after dinner.",ec:"晚饭后我吃饱了。"},
+  {w:"drop",m:"掉落",p:"/drɒp/",e:"Don't drop the cup.",ec:"别把杯子掉地上。"},
+  {w:"spoon",m:"勺子",p:"/spuːn/",e:"He eats with a spoon.",ec:"他用勺子吃饭。"},
+  {w:"floor",m:"地板",p:"/flɔː/",e:"The cat is on the floor.",ec:"猫在地板上。"},
+  {w:"pick",m:"捡起",p:"/pɪk/",e:"I pick an apple.",ec:"我摘了一个苹果。"},
+  {w:"end",m:"结束",p:"/end/",e:"The story has a happy end.",ec:"这个故事有个开心的结局。"},
+  {w:"really",m:"非常；真的",p:"/ˈrɪəli/",e:"I really like it.",ec:"我真的很喜欢它。"},
   // Unit 3
-  {w:"any",m:"任何",p:"/ˈeni/"},
-  {w:"taste",m:"尝起来",p:"/teɪst/"},
-  {w:"noodle",m:"面条",p:"/ˈnuːdl/"},
-  {w:"enjoy",m:"享受",p:"/ɪnˈdʒɔɪ/"},
-  {w:"then",m:"然后",p:"/ðen/"},
-  {w:"last",m:"最后",p:"/lɑːst/"},
-  {w:"minute",m:"分钟",p:"/ˈmɪnɪt/"},
-  {w:"only",m:"唯一的；只有",p:"/ˈəʊnli/"},
-  {w:"cook",m:"烹饪；厨师",p:"/kʊk/"},
-  {w:"dumpling",m:"饺子",p:"/ˈdʌmplɪŋ/"},
-  {w:"into",m:"到……里面",p:"/ˈɪntuː/"},
-  {w:"pot",m:"锅",p:"/pɒt/"},
-  {w:"boil",m:"煮沸",p:"/bɔɪl/"},
-  {w:"careful",m:"小心的",p:"/ˈkeəfl/"},
-  {w:"hot",m:"热的",p:"/hɒt/"},
-  {w:"cold",m:"冷的",p:"/kəʊld/"},
-  {w:"remember",m:"记得",p:"/rɪˈmembə/"},
-  {w:"fire",m:"火",p:"/ˈfaɪə/"},
+  {w:"any",m:"任何",p:"/ˈeni/",e:"Do you have any water?",ec:"你有一些水吗？"},
+  {w:"taste",m:"尝起来",p:"/teɪst/",e:"The cake tastes good.",ec:"蛋糕尝起来很好吃。"},
+  {w:"noodle",m:"面条",p:"/ˈnuːdl/",e:"I like noodle soup.",ec:"我喜欢面条汤。"},
+  {w:"enjoy",m:"享受",p:"/ɪnˈdʒɔɪ/",e:"We enjoy the music.",ec:"我们享受这音乐。"},
+  {w:"then",m:"然后",p:"/ðen/",e:"Wash your hands, then eat.",ec:"先洗手，然后吃饭。"},
+  {w:"last",m:"最后",p:"/lɑːst/",e:"He is the last one.",ec:"他是最后一个。"},
+  {w:"minute",m:"分钟",p:"/ˈmɪnɪt/",e:"Wait a minute.",ec:"等一下。"},
+  {w:"only",m:"唯一的；只有",p:"/ˈəʊnli/",e:"I have only one pen.",ec:"我只有一支笔。"},
+  {w:"cook",m:"烹饪；厨师",p:"/kʊk/",e:"My mom can cook well.",ec:"我妈妈做饭很好吃。"},
+  {w:"dumpling",m:"饺子",p:"/ˈdʌmplɪŋ/",e:"We eat dumplings at Spring Festival.",ec:"春节我们吃饺子。"},
+  {w:"into",m:"到……里面",p:"/ˈɪntuː/",e:"Put the book into the bag.",ec:"把书放进包里。"},
+  {w:"pot",m:"锅",p:"/pɒt/",e:"The water is in the pot.",ec:"水在锅里。"},
+  {w:"boil",m:"煮沸",p:"/bɔɪl/",e:"We boil the water.",ec:"我们把水烧开。"},
+  {w:"careful",m:"小心的",p:"/ˈkeəfl/",e:"Be careful with the knife.",ec:"用刀要小心。"},
+  {w:"hot",m:"热的",p:"/hɒt/",e:"The sun is hot.",ec:"太阳很热。"},
+  {w:"cold",m:"冷的",p:"/kəʊld/",e:"I feel cold.",ec:"我觉得冷。"},
+  {w:"remember",m:"记得",p:"/rɪˈmembə/",e:"I remember your name.",ec:"我记得你的名字。"},
+  {w:"fire",m:"火",p:"/ˈfaɪə/",e:"Don't play with fire.",ec:"别玩火。"},
   // Unit 4
-  {w:"kitchen",m:"厨房",p:"/ˈkɪtʃɪn/"},
-  {w:"sweep",m:"清扫",p:"/swiːp/"},
-  {w:"dish",m:"盘子；菜肴",p:"/dɪʃ/"},
-  {w:"rubbish",m:"垃圾",p:"/ˈrʌbɪʃ/"},
-  {w:"clear",m:"清理；清楚的",p:"/klɪə/"},
-  {w:"chore",m:"家务",p:"/tʃɔː/"},
-  {w:"dirty",m:"脏的",p:"/ˈdɜːti/"},
-  {w:"well",m:"（语气词）啊；健康的；好",p:"/wel/"},
-  {w:"bin",m:"箱子",p:"/bɪn/"},
-  {w:"because",m:"因为",p:"/bɪˈkɒz/"},
-  {w:"do",m:"做",p:"/duː/"},
-  {w:"agree",m:"同意",p:"/əˈɡriː/"},
+  {w:"kitchen",m:"厨房",p:"/ˈkɪtʃɪn/",e:"My mom is in the kitchen.",ec:"妈妈在厨房里。"},
+  {w:"sweep",m:"清扫",p:"/swiːp/",e:"I sweep the floor.",ec:"我扫地。"},
+  {w:"dish",m:"盘子；菜肴",p:"/dɪʃ/",e:"Wash the dish, please.",ec:"请把盘子洗了。"},
+  {w:"rubbish",m:"垃圾",p:"/ˈrʌbɪʃ/",e:"Throw the rubbish away.",ec:"把垃圾扔掉。"},
+  {w:"clear",m:"清理；清楚的",p:"/klɪə/",e:"Please clear the table.",ec:"请收拾桌子。"},
+  {w:"chore",m:"家务",p:"/tʃɔː/",e:"I do my chore every day.",ec:"我每天做家务。"},
+  {w:"dirty",m:"脏的",p:"/ˈdɜːti/",e:"My hands are dirty.",ec:"我的手脏了。"},
+  {w:"well",m:"（语气词）啊；健康的；好",p:"/wel/",e:"I am well, thank you.",ec:"我很好，谢谢。"},
+  {w:"bin",m:"箱子",p:"/bɪn/",e:"Put it in the bin.",ec:"把它放进垃圾桶。"},
+  {w:"because",m:"因为",p:"/bɪˈkɒz/",e:"I am happy because it is sunny.",ec:"我很开心因为天气晴朗。"},
+  {w:"do",m:"做",p:"/duː/",e:"I do my homework.",ec:"我做家庭作业。"},
+  {w:"agree",m:"同意",p:"/əˈɡriː/",e:"I agree with you.",ec:"我同意你。"},
   // Unit 5
-  {w:"smile",m:"微笑",p:"/smaɪl/"},
-  {w:"open",m:"开着的；打开",p:"/ˈəʊpən/"},
-  {w:"cheer",m:"鼓励",p:"/tʃɪə/"},
-  {w:"ready",m:"准备好的",p:"/ˈredi/"},
-  {w:"kind",m:"友善的",p:"/kaɪnd/"},
+  {w:"smile",m:"微笑",p:"/smaɪl/",e:"She gives me a smile.",ec:"她对我微笑。"},
+  {w:"open",m:"开着的；打开",p:"/ˈəʊpən/",e:"Please open the door.",ec:"请开门。"},
+  {w:"cheer",m:"鼓励",p:"/tʃɪə/",e:"We cheer for our team.",ec:"我们为我们的队伍加油。"},
+  {w:"ready",m:"准备好的",p:"/ˈredi/",e:"Are you ready?",ec:"你准备好了吗？"},
+  {w:"kind",m:"友善的",p:"/kaɪnd/",e:"She is a kind girl.",ec:"她是个友善的女孩。"},
   // Unit 6
-  {w:"lot",m:"许多",p:"/lɒt/"},
-  {w:"happy",m:"开心的",p:"/ˈhæpi/"},
-  {w:"share",m:"分享",p:"/ʃeə/"},
-  {w:"hard",m:"努力地",p:"/hɑːd/"},
-  {w:"animal",m:"动物",p:"/ˈænɪml/"},
-  {w:"tell",m:"告诉",p:"/tel/"},
-  {w:"else",m:"其他的",p:"/els/"},
-  {w:"him",m:"他",p:"/hɪm/"},
-  {w:"birthday",m:"生日",p:"/ˈbɜːθdeɪ/"},
-  {w:"cake",m:"蛋糕",p:"/keɪk/"},
-  {w:"spend",m:"度过",p:"/spend/"},
-  {w:"sweet",m:"体贴的；甜的",p:"/swiːt/"},
-  {w:"laugh",m:"笑",p:"/lɑːf/"},
-  {w:"all",m:"全部的",p:"/ɔːl/"},
-  {w:"surprise",m:"使惊奇；惊喜",p:"/səˈpraɪz/"},
-  {w:"funny",m:"有趣的",p:"/ˈfʌni/"},
-  {w:"story",m:"故事",p:"/ˈstɔːri/"},
-  {w:"picture",m:"画；照片",p:"/ˈpɪktʃə/"},
+  {w:"lot",m:"许多",p:"/lɒt/",e:"Thanks a lot.",ec:"非常感谢。"},
+  {w:"happy",m:"开心的",p:"/ˈhæpi/",e:"I am happy today.",ec:"我今天很开心。"},
+  {w:"share",m:"分享",p:"/ʃeə/",e:"Let's share the cake.",ec:"我们一起分享蛋糕吧。"},
+  {w:"hard",m:"努力地",p:"/hɑːd/",e:"He works hard.",ec:"他学习很努力。"},
+  {w:"animal",m:"动物",p:"/ˈænɪml/",e:"The dog is a cute animal.",ec:"狗是一种可爱的动物。"},
+  {w:"tell",m:"告诉",p:"/tel/",e:"Tell me a story.",ec:"给我讲个故事吧。"},
+  {w:"else",m:"其他的",p:"/els/",e:"What else do you want?",ec:"你还想要别的什么？"},
+  {w:"him",m:"他",p:"/hɪm/",e:"I see him at school.",ec:"我在学校看见他。"},
+  {w:"birthday",m:"生日",p:"/ˈbɜːθdeɪ/",e:"Today is his birthday.",ec:"今天是他的生日。"},
+  {w:"cake",m:"蛋糕",p:"/keɪk/",e:"She makes a big cake.",ec:"她做了一个大蛋糕。"},
+  {w:"spend",m:"度过",p:"/spend/",e:"We spend time together.",ec:"我们在一起度过时光。"},
+  {w:"sweet",m:"体贴的；甜的",p:"/swiːt/",e:"The candy is sweet.",ec:"糖果是甜的。"},
+  {w:"laugh",m:"笑",p:"/lɑːf/",e:"The joke makes me laugh.",ec:"这个笑话让我笑。"},
+  {w:"all",m:"全部的",p:"/ɔːl/",e:"We are all here.",ec:"我们都在这里。"},
+  {w:"surprise",m:"使惊奇；惊喜",p:"/səˈpraɪz/",e:"What a nice surprise!",ec:"真是个惊喜！"},
+  {w:"funny",m:"有趣的",p:"/ˈfʌni/",e:"The movie is funny.",ec:"这部电影很有趣。"},
+  {w:"story",m:"故事",p:"/ˈstɔːri/",e:"I read a story.",ec:"我读了一个故事。"},
+  {w:"picture",m:"画；照片",p:"/ˈpɪktʃə/",e:"Draw a picture.",ec:"画一幅画。"},
   // Unit 7
-  {w:"worker",m:"工人",p:"/ˈwɜːkə/"},
-  {w:"doctor",m:"医生",p:"/ˈdɒktə/"},
-  {w:"driver",m:"司机",p:"/ˈdraɪvə/"},
-  {w:"evening",m:"晚上",p:"/ˈiːvnɪŋ/"},
-  {w:"nurse",m:"护士",p:"/nɜːs/"},
-  {w:"farmer",m:"农民",p:"/ˈfɑːmə/"},
-  {w:"scientist",m:"科学家",p:"/ˈsaɪəntɪst/"},
+  {w:"worker",m:"工人",p:"/ˈwɜːkə/",e:"My dad is a worker.",ec:"我爸爸是一名工人。"},
+  {w:"doctor",m:"医生",p:"/ˈdɒktə/",e:"The doctor helps sick people.",ec:"医生帮助生病的人。"},
+  {w:"driver",m:"司机",p:"/ˈdraɪvə/",e:"He is a bus driver.",ec:"他是一名公交车司机。"},
+  {w:"evening",m:"晚上",p:"/ˈiːvnɪŋ/",e:"We eat dinner in the evening.",ec:"我们晚上吃晚饭。"},
+  {w:"nurse",m:"护士",p:"/nɜːs/",e:"The nurse is kind.",ec:"护士很友善。"},
+  {w:"farmer",m:"农民",p:"/ˈfɑːmə/",e:"The farmer grows rice.",ec:"农民种水稻。"},
+  {w:"scientist",m:"科学家",p:"/ˈsaɪəntɪst/",e:"A scientist loves to study.",ec:"科学家热爱研究。"},
   // Unit 8
-  {w:"grandpa",m:"爷爷；外公",p:"/ˈɡrænpɑː/"},
-  {w:"uncle",m:"叔叔；舅舅",p:"/ˈʌŋkl/"},
-  {w:"aunt",m:"姑妈；姨妈",p:"/ɑːnt/"},
-  {w:"sister",m:"姐姐；妹妹",p:"/ˈsɪstə/"},
-  {w:"leave",m:"留下；离开",p:"/liːv/"},
-  {w:"note",m:"便条；笔记",p:"/nəʊt/"},
-  {w:"sing",m:"唱歌",p:"/sɪŋ/"},
-  {w:"song",m:"歌曲",p:"/sɒŋ/"},
-  {w:"warm",m:"温暖的",p:"/wɔːm/"},
-  {w:"who",m:"谁",p:"/huː/"},
-  {w:"date",m:"日期",p:"/deɪt/"},
-  {w:"policeman",m:"男警察",p:"/pəˈliːsmən/"},
-  {w:"policewoman",m:"女警察",p:"/pəˈliːswʊmən/"},
-  {w:"afternoon",m:"下午",p:"/ˌɑːftəˈnuːn/"},
-  {w:"night",m:"夜晚",p:"/naɪt/"},
-  {w:"long",m:"长的",p:"/lɒŋ/"},
-  {w:"game",m:"游戏",p:"/ɡeɪm/"},
-  {w:"sound",m:"听起来",p:"/saʊnd/"},
-  {w:"dear",m:"亲爱的",p:"/dɪə/"},
-  {w:"once",m:"一次",p:"/wʌns/"},
-  {w:"weekend",m:"周末",p:"/ˌwiːkˈend/"},
-  {w:"sit",m:"坐",p:"/sɪt/"},
-  {w:"wish",m:"愿望；祝愿",p:"/wɪʃ/"},
-  {w:"back",m:"以前；后面的",p:"/bæk/"},
-  {w:"through",m:"穿过",p:"/θruː/"},
-  {w:"forward",m:"向前",p:"/ˈfɔːwəd/"},
-  {w:"part",m:"部分",p:"/pɑːt/"},
-  {w:"hope",m:"希望",p:"/həʊp/"},
-  {w:"during",m:"在……期间",p:"/ˈdjʊərɪŋ/"},
-  {w:"tree",m:"树",p:"/triː/"},
-  {w:"never",m:"永不",p:"/ˈnevə/"},
-  {w:"old",m:"老的",p:"/əʊld/"},
-  {w:"dance",m:"跳舞",p:"/dɑːns/"},
-  {w:"firework",m:"烟花",p:"/ˈfaɪəwɜːk/"},
-  {w:"mooncake",m:"月饼",p:"/ˈmuːnkeɪk/"},
-  {w:"visit",m:"拜访",p:"/ˈvɪzɪt/"},
-  {w:"meal",m:"一餐",p:"/miːl/"},
-  {w:"favourite",m:"最喜欢的",p:"/ˈfeɪvərɪt/"},
-  {w:"festival",m:"节日",p:"/ˈfestɪvl/"},
-  {w:"far",m:"远的",p:"/fɑː/"},
-  {w:"near",m:"近的；附近的",p:"/nɪə/"},
+  {w:"grandpa",m:"爷爷；外公",p:"/ˈɡrænpɑː/",e:"My grandpa is old.",ec:"我的爷爷年纪大了。"},
+  {w:"uncle",m:"叔叔；舅舅",p:"/ˈʌŋkl/",e:"My uncle is tall.",ec:"我的叔叔很高。"},
+  {w:"aunt",m:"姑妈；姨妈",p:"/ɑːnt/",e:"My aunt is a teacher.",ec:"我的姑妈是老师。"},
+  {w:"sister",m:"姐姐；妹妹",p:"/ˈsɪstə/",e:"My sister is cute.",ec:"我的妹妹很可爱。"},
+  {w:"leave",m:"留下；离开",p:"/liːv/",e:"I leave home at eight.",ec:"我八点离开家。"},
+  {w:"note",m:"便条；笔记",p:"/nəʊt/",e:"She writes a note.",ec:"她写了一张便条。"},
+  {w:"sing",m:"唱歌",p:"/sɪŋ/",e:"I sing a song.",ec:"我唱一首歌。"},
+  {w:"song",m:"歌曲",p:"/sɒŋ/",e:"This is a happy song.",ec:"这是一首欢快的歌。"},
+  {w:"warm",m:"温暖的",p:"/wɔːm/",e:"The soup is warm.",ec:"汤是温的。"},
+  {w:"who",m:"谁",p:"/huː/",e:"Who is that boy?",ec:"那个男孩是谁？"},
+  {w:"date",m:"日期",p:"/deɪt/",e:"What is the date today?",ec:"今天几号？"},
+  {w:"policeman",m:"男警察",p:"/pəˈliːsmən/",e:"The policeman helps us.",ec:"警察帮助我们。"},
+  {w:"policewoman",m:"女警察",p:"/pəˈliːswʊmən/",e:"The policewoman is brave.",ec:"女警察很勇敢。"},
+  {w:"afternoon",m:"下午",p:"/ˌɑːftəˈnuːn/",e:"I play in the afternoon.",ec:"我下午玩耍。"},
+  {w:"night",m:"夜晚",p:"/naɪt/",e:"Good night, Mom.",ec:"晚安，妈妈。"},
+  {w:"long",m:"长的",p:"/lɒŋ/",e:"The snake is long.",ec:"蛇很长。"},
+  {w:"game",m:"游戏",p:"/ɡeɪm/",e:"Let's play a game.",ec:"我们玩个游戏吧。"},
+  {w:"sound",m:"听起来",p:"/saʊnd/",e:"That sounds good.",ec:"听起来不错。"},
+  {w:"dear",m:"亲爱的",p:"/dɪə/",e:"Dear friend, how are you?",ec:"亲爱的朋友，你好吗？"},
+  {w:"once",m:"一次",p:"/wʌns/",e:"I go there once a week.",ec:"我每周去那里一次。"},
+  {w:"weekend",m:"周末",p:"/ˌwiːkˈend/",e:"We are busy on the weekend.",ec:"我们周末很忙。"},
+  {w:"sit",m:"坐",p:"/sɪt/",e:"Please sit down.",ec:"请坐下。"},
+  {w:"wish",m:"愿望；祝愿",p:"/wɪʃ/",e:"I wish you happy.",ec:"我祝你快乐。"},
+  {w:"back",m:"以前；后面的",p:"/bæk/",e:"Come back soon.",ec:"快点回来。"},
+  {w:"through",m:"穿过",p:"/θruː/",e:"We walk through the park.",ec:"我们穿过公园。"},
+  {w:"forward",m:"向前",p:"/ˈfɔːwəd/",e:"Move forward, please.",ec:"请向前走。"},
+  {w:"part",m:"部分",p:"/pɑːt/",e:"This is the best part.",ec:"这是最精彩的部分。"},
+  {w:"hope",m:"希望",p:"/həʊp/",e:"I hope to see you.",ec:"我希望见到你。"},
+  {w:"during",m:"在……期间",p:"/ˈdjʊərɪŋ/",e:"We study during the day.",ec:"我们白天学习。"},
+  {w:"tree",m:"树",p:"/triː/",e:"The tree is green.",ec:"树是绿色的。"},
+  {w:"never",m:"永不",p:"/ˈnevə/",e:"I never give up.",ec:"我永不放弃。"},
+  {w:"old",m:"老的",p:"/əʊld/",e:"The book is old.",ec:"这本书很旧。"},
+  {w:"dance",m:"跳舞",p:"/dɑːns/",e:"She can dance well.",ec:"她跳舞跳得好。"},
+  {w:"firework",m:"烟花",p:"/ˈfaɪəwɜːk/",e:"We watch the firework.",ec:"我们看烟花。"},
+  {w:"mooncake",m:"月饼",p:"/ˈmuːnkeɪk/",e:"I eat a mooncake.",ec:"我吃一块月饼。"},
+  {w:"visit",m:"拜访",p:"/ˈvɪzɪt/",e:"I visit my grandma.",ec:"我拜访我的奶奶。"},
+  {w:"meal",m:"一餐",p:"/miːl/",e:"We have three meals a day.",ec:"我们一天吃三餐。"},
+  {w:"favourite",m:"最喜欢的",p:"/ˈfeɪvərɪt/",e:"Red is my favourite colour.",ec:"红色是我最喜欢的颜色。"},
+  {w:"festival",m:"节日",p:"/ˈfestɪvl/",e:"Spring Festival is fun.",ec:"春节很好玩。"},
+  {w:"far",m:"远的",p:"/fɑː/",e:"The school is far.",ec:"学校很远。"},
+  {w:"near",m:"近的；附近的",p:"/nɪə/",e:"The park is near.",ec:"公园很近。"},
   // Review
-  {w:"party",m:"派对",p:"/ˈpɑːti/"},
-  {w:"elephant",m:"大象",p:"/ˈelɪfənt/"},
-  {w:"most",m:"最",p:"/məʊst/"},
-  {w:"Africa",m:"非洲",p:"/ˈæfrɪkə/"},
+  {w:"party",m:"派对",p:"/ˈpɑːti/",e:"We have a birthday party.",ec:"我们办了一个生日派对。"},
+  {w:"elephant",m:"大象",p:"/ˈelɪfənt/",e:"The elephant is big.",ec:"大象很大。"},
+  {w:"most",m:"最",p:"/məʊst/",e:"I like summer most.",ec:"我最喜欢夏天。"},
+  {w:"Africa",m:"非洲",p:"/ˈæfrɪkə/",e:"Lions live in Africa.",ec:"狮子生活在非洲。"},
 ];
 
 /* ==================== 状态 ==================== */
@@ -828,7 +842,7 @@ function showView(id){
   });
   window.scrollTo({top:0, behavior:'smooth'});
   if(id==='home') renderHome();
-  if(id==='learn') renderLearn();
+  if(id==='learn'){ resetLearnPos(); renderLearn(); }
   if(id==='checkin') renderCheckin();
   if(id==='progress') renderProgress();
 }
@@ -875,63 +889,94 @@ function renderHome(){
 }
 function beginLearn(){
   ensureToday();
+  resetLearnPos();
   showView('learn');
 }
 
 /* ==================== 学习 ==================== */
+let learnPos = 0; // 学习游标：支持学完后重复学习，与打卡计数分离
+function resetLearnPos(){
+  // 若今日 6 个尚未学完，从断点继续；否则从 0 开始（用于重复学习）
+  learnPos = (state.learnedToday.length < DAILY_COUNT) ? state.learnedToday.length : 0;
+}
 function renderLearn(){
   ensureToday();
+  if(typeof learnPos !== 'number' || learnPos < 0) learnPos = 0;
   const today = pickTodayWords();
-  const idx = state.learnedToday.length;
   const c = document.getElementById('learnContent');
-  if(idx >= DAILY_COUNT){
+  if(learnPos >= DAILY_COUNT){
     c.innerHTML = `<div class="card learn-complete">
       <span class="big-emoji">🎉</span>
       <h2>太棒了！</h2>
       <p style="color:#9A8775;margin-bottom:18px">今天的 ${DAILY_COUNT} 个单词已学完</p>
-      <button class="btn btn-primary btn-big" onclick="showView('games')" style="background:#FF8A3D;color:#fff;max-width:220px">去玩游戏 🎮</button>
+      <button class="btn btn-primary btn-big" onclick="learnRestart()" style="background:#FF8A3D;color:#fff;max-width:220px;margin-bottom:10px">再学一遍 🔁</button>
+      <button class="btn btn-primary btn-big" onclick="showView('games')" style="background:#fff;color:#FF6A1F;border:2px solid #FF8A3D;max-width:220px">去玩游戏 🎮</button>
     </div>`;
     return;
   }
-  const w = today[idx];
+  const w = today[learnPos];
+  const exHtml = (w.e && w.ec) ? `
+    <div class="learn-example">
+      <div class="example-label">📖 读一读（例句）</div>
+      <div class="example-en">${escapeHtml(w.e)}</div>
+      <div class="example-cn">${escapeHtml(w.ec)}</div>
+      <div style="text-align:center">
+        <button class="action-btn" onclick="speak('${escapeHtml(w.e)}')">🔊 读例句</button>
+      </div>
+    </div>` : '';
   c.innerHTML = `
-    <div class="learn-progress">第 ${idx+1} / ${DAILY_COUNT} 个单词</div>
+    <div class="learn-progress">第 ${learnPos+1} / ${DAILY_COUNT} 个单词</div>
     <div class="learn-card">
       <div class="learn-word">${w.w}</div>
       <div class="learn-phonetic">${w.p}</div>
       <div class="learn-meaning">${w.m}</div>
       <div class="learn-actions">
-        <button class="action-btn" onclick="speak('${w.w}')">🔊</button>
+        <button class="action-btn" onclick="speak('${w.w}')">🔊 单词</button>
         <button class="action-btn primary" onclick="learnNext()">我记住了 ✓</button>
       </div>
+      ${exHtml}
+      <div class="learn-tip">💡 多读几遍例句，再试着把单词字母拼一拼！</div>
     </div>`;
   setTimeout(()=>speak(w.w), 200);
 }
+function learnRestart(){
+  learnPos = 0;
+  renderLearn();
+}
 function learnNext(){
   const today = pickTodayWords();
-  const idx = state.learnedToday.length;
+  const idx = learnPos;
   const w = today[idx];
-  state.learnedToday.push(idx);
-  if(!state.wordsLearned.includes(w.w)){
-    state.wordsLearned.push(w.w);
-  }
-  state.stars++;
-  saveState();
-  toast('+1 ⭐ 已记住 '+w.w);
-  confetti();
-  if(state.learnedToday.length === DAILY_COUNT){
-    // 当天学完，自动打卡
-    doCheckin(true);
-  }
-  // 全部单词都学过一遍后，自动打乱并开启新一轮
-  if(state.wordsLearned.length >= WORDS.length){
-    shuffleWords();
-    state.wordsLearned = [];
+  const firstTime = !state.learnedToday.includes(idx);
+  if(firstTime){
+    state.learnedToday.push(idx);
+    if(!state.wordsLearned.includes(w.w)){
+      state.wordsLearned.push(w.w);
+    }
+    state.stars++;
     saveState();
-    setTimeout(()=>{
-      showModal('🎉','一轮通关！','所有单词都已学过一遍，顺序已重新打乱，继续加油！');
-    }, 400);
+    toast('+1 ⭐ 已记住 '+w.w);
+    confetti();
+    if(state.learnedToday.length === DAILY_COUNT){
+      // 当天学完，自动打卡
+      doCheckin(true);
+    }
+    // 全部单词都学过一遍后，自动打乱并开启新一轮
+    if(state.wordsLearned.length >= WORDS.length){
+      shuffleWords();
+      state.wordsLearned = [];
+      saveState();
+      setTimeout(()=>{
+        showModal('🎉','一轮通关！','所有单词都已学过一遍，顺序已重新打乱，继续加油！');
+      }, 400);
+    }
+  }else{
+    // 重复学习模式：仅给鼓励星星，不重复计入打卡/已学
+    state.stars++;
+    saveState();
+    toast('+1 ⭐ 复习 '+w.w);
   }
+  learnPos++;
   renderLearn();
 }
 
@@ -1040,7 +1085,15 @@ function renderMatch(){
 
 function initSpell(){
   const pool = poolWords(5);
-  const items = pool.map(w => ({w, slots:[], keys:[]}));
+  const items = pool.map(w => {
+    const word = w.w.toUpperCase();
+    const letters = word.split('');
+    // 干扰字母：补齐到 12 个按键，每题只生成一次
+    const noiseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').sort(()=>Math.random()-0.5)
+      .slice(0, Math.max(0, 12 - letters.length));
+    const keys = [...letters, ...noiseLetters].sort(()=>Math.random()-0.5);
+    return {w, keys};
+  });
   gameState.items = items;
   gameState.currentInput = '';
   renderSpell();
@@ -1049,10 +1102,7 @@ function renderSpell(){
   const it = gameState.items[gameState.current];
   if(!it){ finishGame(); return; }
   const word = it.w.w.toUpperCase();
-  // 初始字母按键：单词字母 + 一些干扰
-  const letters = word.split('');
-  const noiseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').sort(()=>Math.random()-0.5).slice(0, Math.max(0, 12 - letters.length));
-  const allKeys = [...letters, ...noiseLetters].sort(()=>Math.random()-0.5);
+  const keys = it.keys || word.split('');
   // 当前已输入
   const typed = gameState.currentInput || '';
   const slotsHtml = [];
@@ -1060,9 +1110,13 @@ function renderSpell(){
     if(typed[i]) slotsHtml.push(`<div class="spell-slot">${typed[i]}</div>`);
     else slotsHtml.push(`<div class="spell-slot empty"></div>`);
   }
-  const usedSet = new Set(typed.split(''));
-  const keysHtml = allKeys.map(k=>{
-    const used = usedSet.has(k);
+  // 修复：按"字母出现次数"判断按钮是否用尽，而非 Set 去重（否则含重复字母的单词拼不出第二个字母）
+  const usedCount = {};
+  typed.split('').forEach(ch => { usedCount[ch] = (usedCount[ch]||0) + 1; });
+  const keyCount = {};
+  keys.forEach(k => { keyCount[k] = (keyCount[k]||0) + 1; });
+  const keysHtml = keys.map(k=>{
+    const used = (usedCount[k]||0) >= (keyCount[k]||0);
     return `<button class="spell-key${used?' used':''}" data-k="${k}">${k}</button>`;
   }).join('');
   const html = `
@@ -1098,8 +1152,7 @@ function renderSpell(){
     setTimeout(()=>{
       const correct = typed === word;
       const slots = document.querySelectorAll('.spell-slot');
-      slots.forEach(s => s.style.background = correct ? '#7CD992' : '#FF7A7A');
-      slots.forEach(s => s.style.color = '#fff');
+      slots.forEach(s => { s.style.background = correct ? '#7CD992' : '#FF7A7A'; s.style.color = '#fff'; });
       if(correct){
         gameState.score++;
         speak(word.toLowerCase());
